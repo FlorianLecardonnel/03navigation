@@ -43,16 +43,16 @@
   flex-direction: row;
   height: 100vh;
   padding: 20px;
-  gap: 20px; /* Add space between sidebar and content */
+  gap: 20px;
 }
 
 .columnOne {
   display: flex;
   width: 20%;
   justify-content: center;
-  background-color: #c0c0ee; /* Add background color */
+  background-color: #c0c0ee;
   padding: 10px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Add shadow for better separation */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .linkSelected {
@@ -65,71 +65,71 @@
   text-align: center;
   flex-direction: column;
   width: 80%;
-  background-color: #df9191; /* Add background color */
+  background-color: #df9191;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Add shadow for better separation */
-  border-radius: 8px; /* Add border radius for rounded corners */
-  transition: transform 0.2s ease-in-out; /* Add transition effect */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  transition: transform 0.2s ease-in-out;
 }
 
 .templateColumn:hover {
-  transform: scale(1.01); /* Slightly enlarge on hover */
+  transform: scale(1.01);
 }
 
 /* Styles pour le formulaire */
 
 form {
-  background-color: #f9f9f9; /* Couleur de fond légère pour le formulaire */
-  padding: 20px; /* Espacement interne */
-  border-radius: 10px; /* Bordures arrondies */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce pour un effet de profondeur */
-  max-width: 400px; /* Largeur maximale du formulaire */
-  margin: 0 auto; /* Centrer le formulaire */
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 form input[type="text"],
 form input[type="date"],
 form textarea {
-  width: 100%; /* Prendre toute la largeur disponible */
-  padding: 10px; /* Espacement interne */
-  margin: 10px 0; /* Espacement externe en haut et en bas */
-  border: 1px solid #ddd; /* Bordure légère */
-  border-radius: 5px; /* Bordures arrondies */
-  font-size: 16px; /* Taille de la police */
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
 form input[type="checkbox"] {
-  margin-right: 10px; /* Espacement à droite du checkbox */
+  margin-right: 10px;
 }
 
 .button-group {
-  display: flex; /* Utiliser flexbox pour aligner les boutons */
-  gap: 10px; /* Espacement entre les boutons */
+  display: flex;
+  gap: 10px;
 }
 
 .button {
-  flex: 1; /* Faire en sorte que les boutons prennent une largeur égale */
-  background-color: #c0c0ee; /* Couleur de fond verte pour les boutons */
-  color: white; /* Couleur du texte blanche */
-  padding: 10px; /* Espacement interne */
-  border: none; /* Pas de bordure */
-  border-radius: 5px; /* Bordures arrondies */
-  font-size: 16px; /* Taille de la police */
-  cursor: pointer; /* Curseur pointeur au survol */
+  flex: 1;
+  background-color: #c0c0ee;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .button:last-child {
-  background-color: #df9191; /* Couleur de fond rouge pour le bouton "Supprimer" */
+  background-color: #df9191;
 }
 
 .button:hover {
-  opacity: 0.9; /* Légère transparence au survol */
-  background-color: #5b5bd3; /* Couleur de fond légèrement plus foncée au survol */
+  opacity: 0.9;
+  background-color: #5b5bd3;
 }
 
 .button:hover:last-child {
-  opacity: 0.9; /* Légère transparence au survol */
-  background-color: #f44336; /* Couleur de fond légèrement plus foncée au survol */
+  opacity: 0.9;
+  background-color: #f44336;
 }
 
 .titleErrorHidden,
@@ -147,20 +147,20 @@ form input[type="checkbox"] {
 
 .errorTitle,
 .errorDate {
-  color: red; /* Couleur rouge pour les messages d'erreur */
-  font-size: 14px; /* Taille de la police pour les messages d'erreur */
-  margin-top: -10px; /* Espacement pour rapprocher les messages d'erreur des champs */
-  margin-bottom: 10px; /* Espacement en bas pour séparer les messages d'erreur des champs */
+  color: red;
+  font-size: 14px;
+  margin-top: -10px;
+  margin-bottom: 10px;
 }
 
 .checkbox-group {
-  display: flex; /* Utiliser flexbox pour aligner le checkbox et le label */
-  align-items: center; /* Aligner verticalement au centre */
-  margin: 10px 0; /* Espacement externe en haut et en bas */
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
 }
 
 .checkbox-group input[type="checkbox"] {
-  margin-right: 10px; /* Espacement à droite du checkbox */
+  margin-right: 10px;
 }
 
 /* Styles pour le tableau des tâches */
@@ -168,13 +168,13 @@ form input[type="checkbox"] {
 .tasks-container {
   margin: 20px;
   padding: 20px;
-  background-color: #df9191; /* Fond rouge pour le conteneur */
+  background-color: #df9191;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
 
 h2 {
-  color: #ffffff; /* Couleur du texte blanche pour le titre */
+  color: #ffffff;
   margin-bottom: 20px;
 }
 
@@ -184,9 +184,9 @@ table {
   margin: 20px 0;
   font-size: 16px;
   text-align: left;
-  background-color: #ffffff; /* Fond blanc pour le tableau */
+  background-color: #ffffff;
   border-radius: 10px;
-  overflow: hidden; /* Pour arrondir les coins */
+  overflow: hidden;
 }
 
 thead {
@@ -242,14 +242,11 @@ button.otherButtonValidate:last-child:hover {
   background-color: #f44336;
 }
 
-/* Container de la table centré */
 .centerTable {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-/* POP UP */
 
 /* POP UP */
 #supprimerflorian {
@@ -274,7 +271,8 @@ button.otherButtonValidate:last-child:hover {
   text-align: center;
 }
 
-#buttonannuler, #buttonsvalider {
+#buttonannuler,
+#buttonsvalider {
   background-color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -310,7 +308,8 @@ button.otherButtonValidate:last-child:hover {
   line-height: 1.5;
 }
 
-#text, #text2 {
+#text,
+#text2 {
   text-align: center;
   font-size: 16px;
   font-family: Noto Sans, sans-serif;
@@ -330,4 +329,70 @@ button.otherButtonValidate:last-child:hover {
 
 .modalDeleteVisible {
   visibility: visible;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .templateRow {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .columnOne,
+  .templateColumn {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .templateColumn {
+    margin-top: 20px;
+  }
+
+  form {
+    padding: 15px;
+    box-shadow: none;
+  }
+
+  .tasks-container {
+    padding: 15px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .App-header {
+    font-size: calc(8px + 2vmin);
+  }
+
+  form {
+    padding: 10px;
+  }
+
+  .button {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .tasks-container {
+    margin: 10px;
+    padding: 10px;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  #supprimerflorian {
+    width: 95%;
+    padding: 15px;
+  }
+
+  #buttonannuler,
+  #buttonsvalider {
+    padding: 12px;
+    font-size: 14px;
+  }
 }
