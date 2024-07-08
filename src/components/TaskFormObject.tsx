@@ -4,8 +4,8 @@ import ITask from "../interfaces/ITask";
 type Props = {
   addTaskInComponentTasks: (taskRow: ITask, isModified: boolean) => void;
   isModified: boolean;
-  task: ITask
-}
+  task: ITask;
+};
 
 const TaskFormObject: React.FC<Props> = ({
   addTaskInComponentTasks,
@@ -20,36 +20,45 @@ const TaskFormObject: React.FC<Props> = ({
   // const [dateTask, setDateTask] = useState("");
   // const [done, setDone] = useState(false);
 
-  const [taskForm, setTaskForm] = useState<ITask>({ title: "", date: "" });
+  const [taskForm, setTaskForm] = useState<ITask>({
+    title: "",
+    date: "",
+    priority: "",
+  });
 
   const [showButtonCreateOrModify, setShowButtonCreateOrModify] = useState("");
 
   useEffect(() => {
     //state pour les champs
     if (!isModified) {
-        setTaskForm({ title: '', description: '', date: '', done: false });
-        setShowButtonCreateOrModify("Créer")
+      setTaskForm({
+        title: "",
+        description: "",
+        date: "",
+        done: false,
+        priority:"oui",
+      });
+      setShowButtonCreateOrModify("Créer");
     } else {
-        setTaskForm(task);
-        setShowButtonCreateOrModify("Modifier")
+      setTaskForm(task);
+      setShowButtonCreateOrModify("Modifier");
     }
-}, [isModified]);
+  }, [isModified]);
 
-useEffect(() => {
+  useEffect(() => {
     //state pour les champs
     if (isModified) {
-        setTaskForm(task);
-        //setShowButtonCreateOrModify("Modifier")
+      setTaskForm(task);
+      //setShowButtonCreateOrModify("Modifier")
     }
-}, [task._id]);
-
-  
+  }, [task._id]);
 
   enum FormField {
     StringField,
     TextAreaField,
     DateField,
     CheckBoxField,
+    RadioButtonField,
   }
 
   function handleChange<T>(value: T, typeField: number): void {
@@ -64,6 +73,9 @@ useEffect(() => {
 
     if (typeField === FormField.CheckBoxField)
       setTaskForm({ ...taskForm, done: value as boolean });
+
+    if (typeField === FormField.RadioButtonField)
+      setTaskForm({ ...taskForm, priority: value as string });
   }
 
   function modifyTask(event: any) {
@@ -139,9 +151,49 @@ useEffect(() => {
           />
           <label htmlFor="done">Done</label>
         </div>
+        <h3>Priority</h3>
+        <div className="priorityRow">
+          <div>
+            <input
+              type="radio"
+              value="oui"
+              id="huey"
+              name="drone"
+              checked={taskForm.priority === "oui"}
+              onClick={(event) =>
+                handleChange(
+                  (event.target as HTMLInputElement).value,
+                  FormField.RadioButtonField
+                )
+              }
+            />
+            <label htmlFor="priority">Oui</label>
+          </div>
+
+          <div>
+            <input
+              type="radio"
+              value="non"
+              id="dewey"
+              name="drone"
+              checked={taskForm.priority === "non"}
+              onClick={(event) =>
+                handleChange(
+                  (event.target as HTMLInputElement).value,
+                  FormField.RadioButtonField
+                )
+              }
+            />
+            <label htmlFor="priority">Non</label>
+          </div>
+        </div>
 
         <div className="button-group">
-          <input type="submit" value="Valider" className="button" />
+          <input
+            type="submit"
+            value={showButtonCreateOrModify}
+            className="button"
+          />
           <input type="submit" value="Supprimer" className="button" />
           {/* <button value="Supprimer" className="button" /> */}
         </div>

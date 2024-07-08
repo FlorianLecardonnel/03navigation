@@ -48,6 +48,7 @@ const TaskRow: React.FC<any> = (props: Props) => {
       <td>{taskRow.title}</td>
       <td>{taskRow.description}</td>
       <td>{taskRow.date}</td>
+      <td>{taskRow.priority}</td>
       <td>
         <button
           className="otherButtonValidate"

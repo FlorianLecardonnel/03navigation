@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import TaskFormObject from "../components/TaskFormObject";
 import ITask from "../interfaces/ITask";
 import {
@@ -17,34 +17,37 @@ const Tasks: React.FC = () => {
   const [idTaskToDelete, setIdTaskToDelete] = useState("");
 
   const [isModified, setIsModified] = useState(false);
-  const [taskToPass, setTaskToPass] = useState<ITask>({ title: "", date: "" });
+  const [taskToPass, setTaskToPass] = useState<ITask>({ title: "", date: "", priority:'oui' });
 
   useEffect(() => {
     getAllTasks();
   }, []);
 
-  // Function to fetch all tasks
-  const getAllTasks = async () => {
+  const getAllTasks = useCallback(async () => {
+    setListTasks([]);
     let list = await fetchTasks();
-    setListTasks(list);
-  };
+    setListTasks([...list]);
+  }, []);
 
   // Function to add a task
-  const addTaskInComponentTasks = async (taskToAdd: ITask, isModifiedValue: boolean) => {
+  const addTaskInComponentTasks = async (
+    taskToAdd: ITask,
+    isModifiedValue: boolean
+  ) => {
     if (isModifiedValue) {
-        //modifier une tâche
-        let task = await editTask(taskToAdd);
-        console.log(task);
-        setIsModified(false);
+      //modifier une tâche
+      let task = await editTask(taskToAdd);
+      console.log(task);
+      setIsModified(false);
     } else {
-        //ajouter une tâche
-        let task = await addTask(taskToAdd);
-        console.log(task);
-        setIsModified(false);
+      //ajouter une tâche
+      let task = await addTask(taskToAdd);
+      console.log(task);
+      setIsModified(false);
     }
-    //afficher la liste 
+    //afficher la liste
     await getAllTasks();
-};
+  };
 
   const deleteTaskInComponentTasks = (idRowTask: string) => {
     //ouvrir modal de validation
@@ -74,7 +77,7 @@ const Tasks: React.FC = () => {
 
   const updateTaskRow = async (isModified: boolean, taskRow: ITask) => {
     setIsModified(isModified);
-    setTaskToPass(taskToPass);
+    setTaskToPass(taskRow);
   };
 
   return (
@@ -83,7 +86,9 @@ const Tasks: React.FC = () => {
         <TaskFormObject
           task={taskToPass}
           isModified={isModified}
-          addTaskInComponentTasks={(taskToAdd: ITask, isModified: boolean) => addTaskInComponentTasks(taskToAdd, isModified)}
+          addTaskInComponentTasks={(taskToAdd: ITask, isModified: boolean) =>
+            addTaskInComponentTasks(taskToAdd, isModified)
+          }
         />
       </div>
       <div id="supprimerflorian" className={modalDeleteStyle}>
@@ -110,6 +115,7 @@ const Tasks: React.FC = () => {
               <th scope="col">Titre</th>
               <th scope="col">Description</th>
               <th scope="col">Date</th>
+              <th scope="col">Priority</th>
               <th scope="col">Modifier</th>
               <th scope="col">Supprimer</th>
             </tr>
