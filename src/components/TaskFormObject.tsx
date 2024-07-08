@@ -1,7 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ITask from "../interfaces/ITask";
 
-const TaskFormObject: React.FC<any> = ({ addTaskInComponentTasks }) => {
+type Props = {
+  addTaskInComponentTasks: (taskRow: ITask, isModified: boolean) => void;
+  isModified: boolean;
+  task: ITask
+}
+
+const TaskFormObject: React.FC<Props> = ({
+  addTaskInComponentTasks,
+  isModified,
+  task,
+}) => {
   const [titleVisible, setTitleVisible] = useState("titleErrorHidden");
   const [dateVisible, setDateVisible] = useState("dateErrorHidden");
 
@@ -11,6 +21,29 @@ const TaskFormObject: React.FC<any> = ({ addTaskInComponentTasks }) => {
   // const [done, setDone] = useState(false);
 
   const [taskForm, setTaskForm] = useState<ITask>({ title: "", date: "" });
+
+  const [showButtonCreateOrModify, setShowButtonCreateOrModify] = useState("");
+
+  useEffect(() => {
+    //state pour les champs
+    if (!isModified) {
+        setTaskForm({ title: '', description: '', date: '', done: false });
+        setShowButtonCreateOrModify("Créer")
+    } else {
+        setTaskForm(task);
+        setShowButtonCreateOrModify("Modifier")
+    }
+}, [isModified]);
+
+useEffect(() => {
+    //state pour les champs
+    if (isModified) {
+        setTaskForm(task);
+        //setShowButtonCreateOrModify("Modifier")
+    }
+}, [task._id]);
+
+  
 
   enum FormField {
     StringField,
@@ -54,7 +87,7 @@ const TaskFormObject: React.FC<any> = ({ addTaskInComponentTasks }) => {
       fieldsValidate = false;
     }
     if (fieldsValidate) {
-      addTaskInComponentTasks(taskForm);
+      addTaskInComponentTasks(taskForm, isModified);
     }
   }
 

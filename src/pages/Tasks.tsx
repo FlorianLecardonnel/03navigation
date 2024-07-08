@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import TaskFormObject from "../components/TaskFormObject";
 import ITask from "../interfaces/ITask";
-import { fetchTasks, addTask, deleteTask, updateTaskDone } from "../services/fetchTask";
+import {
+  fetchTasks,
+  addTask,
+  deleteTask,
+  updateTaskDone,
+  editTask,
+} from "../services/fetchTask";
 import TaskRow from "../components/TaskRow";
 
 const Tasks: React.FC = () => {
@@ -9,6 +15,9 @@ const Tasks: React.FC = () => {
 
   const [modalDeleteStyle, setModalDeleteStyle] = useState("modalDeleteHidden");
   const [idTaskToDelete, setIdTaskToDelete] = useState("");
+
+  const [isModified, setIsModified] = useState(false);
+  const [taskToPass, setTaskToPass] = useState<ITask>({ title: "", date: "" });
 
   useEffect(() => {
     getAllTasks();
@@ -21,11 +30,21 @@ const Tasks: React.FC = () => {
   };
 
   // Function to add a task
-  const addTaskInComponentTasks = async (taskToAdd: ITask) => {
-    let task = await addTask(taskToAdd);
-    console.log(task);
+  const addTaskInComponentTasks = async (taskToAdd: ITask, isModifiedValue: boolean) => {
+    if (isModifiedValue) {
+        //modifier une tâche
+        let task = await editTask(taskToAdd);
+        console.log(task);
+        setIsModified(false);
+    } else {
+        //ajouter une tâche
+        let task = await addTask(taskToAdd);
+        console.log(task);
+        setIsModified(false);
+    }
+    //afficher la liste 
     await getAllTasks();
-  };
+};
 
   const deleteTaskInComponentTasks = (idRowTask: string) => {
     //ouvrir modal de validation
@@ -51,16 +70,20 @@ const Tasks: React.FC = () => {
     let taskResultat = await updateTaskDone(taskRow);
     console.log(taskResultat);
     await getAllTasks();
-    
+  };
+
+  const updateTaskRow = async (isModified: boolean, taskRow: ITask) => {
+    setIsModified(isModified);
+    setTaskToPass(taskToPass);
   };
 
   return (
     <div className="tasks-container">
       <div>
         <TaskFormObject
-          addTaskInComponentTasks={(taskToAdd: ITask) =>
-            addTaskInComponentTasks(taskToAdd)
-          }
+          task={taskToPass}
+          isModified={isModified}
+          addTaskInComponentTasks={(taskToAdd: ITask, isModified: boolean) => addTaskInComponentTasks(taskToAdd, isModified)}
         />
       </div>
       <div id="supprimerflorian" className={modalDeleteStyle}>
@@ -101,6 +124,9 @@ const Tasks: React.FC = () => {
                   }
                   updateTaskCheckbox={(taskRow: ITask) =>
                     updateTaskCheckbox(taskRow)
+                  }
+                  updateTaskRow={(isModified: boolean, taskRow: ITask) =>
+                    updateTaskRow(isModified, taskRow)
                   }
                   key={taskRow._id}
                 />

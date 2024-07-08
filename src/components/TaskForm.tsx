@@ -48,6 +48,7 @@ const TaskForm: React.FC = () => {
     return validate;
   }
 
+
   return (
     <div className="">
       <form onSubmit={modifyTask}>

@@ -7,14 +7,14 @@ type Props = {
   deleteTaskInComponentTasks: (id: string) => void;
   updateTaskCheckbox: (taskRow: ITask) => void;
   setTaskRow: React.Dispatch<React.SetStateAction<string>>;
-  // updateTaskRow (ismodifytaskRow: ITask)
+  updateTaskRow(isModified: boolean, taskRow: ITask): void;
 };
 
 const TaskRow: React.FC<any> = (props: Props) => {
   const [taskRow, setTaskRow] = useState(props.taskRow);
 
   const updateTaskCheckbox = async (doneValue: boolean) => {
-    const taskRowForDone = ({ ...taskRow, done: doneValue });
+    const taskRowForDone = { ...taskRow, done: doneValue };
     setTaskRow(taskRowForDone);
     taskRow.done = doneValue;
     console.log("change done value of task");
@@ -22,6 +22,12 @@ const TaskRow: React.FC<any> = (props: Props) => {
   };
   const deleteTaskInComponent = async () => {
     props.deleteTaskInComponentTasks(taskRow._id!);
+  };
+  const updateTaskRow = async (value: string) => {
+    //arguments
+    //isModified:boolean
+    //task:Itask
+    props.updateTaskRow(true, taskRow);
   };
 
   // const updateTaskRow = async () {
@@ -43,7 +49,12 @@ const TaskRow: React.FC<any> = (props: Props) => {
       <td>{taskRow.description}</td>
       <td>{taskRow.date}</td>
       <td>
-        <button className="otherButtonValidate">Modifier</button>
+        <button
+          className="otherButtonValidate"
+          onClick={() => updateTaskRow("updateRow")}
+        >
+          Modifier
+        </button>
       </td>
       <td>
         <button
